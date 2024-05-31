@@ -2345,7 +2345,8 @@ PrefabInstance:
       propertyPath: sensY
       value: 200
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8597936877094439983, guid: 8e639791a6b6a9c418ee008c917c6fd5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

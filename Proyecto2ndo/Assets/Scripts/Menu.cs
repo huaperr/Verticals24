@@ -67,7 +67,7 @@ public class Menu : MonoBehaviour
 
     public void PlayLevel2()
     {
-        SceneManager.LoadScene("sample");
+        SceneManager.LoadScene("Level2");
     }
 
     public void PlayLevel3()
