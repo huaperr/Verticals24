@@ -9,6 +9,9 @@ TagManager:
   - win2
   - lastwin
   - win3
+  - Enemy
+  - SnowBall
+  - shadow
   layers:
   - Default
   - TransparentFX

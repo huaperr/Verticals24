@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Timeline;
+using static UnityEngine.EventSystems.EventTrigger;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -70,16 +73,22 @@ public class PlayerMovement : MonoBehaviour
         climbing,
         crouching,
         sliding,
-        air
+        air,
+        idle
     }
+
+    public string aux;
 
     public bool sliding;
     public bool crounching;
     public bool wallrunning;
     public bool climbing;
 
+    private Animator animator;
+
     private void Start()
     {
+
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -113,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
 
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
@@ -150,6 +160,8 @@ public class PlayerMovement : MonoBehaviour
             desiredMoveSpeed = wallrunSpeed;
         }
 
+        
+
 
          else if (sliding)
         {
@@ -181,10 +193,17 @@ public class PlayerMovement : MonoBehaviour
             desiredMoveSpeed = walkSpeed;
         }
 
+        else if (!Input.anyKey && grounded)
+        {
+            
+            state = MovementState.idle;
+        }
+
         else
         {
             state = MovementState.air;
         }
+
 
         if (Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 4f && moveSpeed != 0)
         {
@@ -306,6 +325,13 @@ public class PlayerMovement : MonoBehaviour
     {
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
+
+    public MovementState GetCurrentMovementState()
+    {
+        return state;
+    }
+
+    
 }
 
 

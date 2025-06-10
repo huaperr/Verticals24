@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class HitboxPlayer : MonoBehaviour
 {
+
+    public string currentLevel;
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.CompareTag("win"))
@@ -19,6 +21,11 @@ public class HitboxPlayer : MonoBehaviour
         if(collision.collider.CompareTag("win3"))
         {
             SceneManager.LoadScene("End");
+        }
+
+        if(collision.collider.CompareTag("shadow"))
+        {
+            SceneManager.LoadScene(currentLevel);
         }
     }
 }
